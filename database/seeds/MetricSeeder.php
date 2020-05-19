@@ -11,6 +11,6 @@ class MetricSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Metric::class, 4)->create();
     }
 }
