@@ -14,7 +14,10 @@ class DriverController extends Controller
      */
     public function index()
     {
-        //
+        $drivers = Driver::all()->sortBy('lastName');
+
+        // dd($drivers);
+        return view('drivers.index', compact('drivers'));
     }
 
     /**
@@ -57,7 +60,9 @@ class DriverController extends Controller
      */
     public function edit(Driver $driver)
     {
-        //
+        $editDriver = Driver::find($driver);
+        dd($editDriver);
+        // return view('details', compact('detailcourse'));
     }
 
     /**
