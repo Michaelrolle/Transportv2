@@ -14,7 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products= Product::all();
+
+        dd($products);
+
+        // return view('products.index', compact('products'));
+        // return view ('products.index', ['products' => $products]);
     }
 
     /**

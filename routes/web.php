@@ -23,18 +23,18 @@ Route::group(['prefix' => 'clients'], function () {
     Route::get('create', 'ClientController@create');
     Route::get('{client}', 'ClientController@show');
     Route::post('store', 'ClientController@store');
-    Route::get('{clients}/edit', 'ClientController@edit');
-    Route::put('{clients}', 'ClientController@update');
+    Route::get('{client}/edit', 'ClientController@edit');
+    Route::put('{client}', 'ClientController@update');
 });
 
 
-Route::group(['prefix' => 'drivers'], function () {
+Route::group(['prefix' => 'drivers', 'as' => 'drivers.'], function () {
     Route::get('', 'DriverController@index');
-    Route::get('create', 'DriverController@create');
-    Route::get('{driver}', 'DriverController@show');
-    Route::post('store', 'DriverController@store');
-    Route::get('{driver}/edit', 'DriverController@edit');
-    Route::put('{drivers}', 'DriverController@update');
+    Route::get('create', 'DriverController@create')->name('create');
+    Route::get('{driver}', 'DriverController@show')->name('show');
+    Route::post('store', 'DriverController@store')->name('store');
+    Route::get('{driver}/edit', 'DriverController@edit')->name('edit');
+    Route::put('{driver}', 'DriverController@update')->name('update');
 });
 
 
@@ -43,8 +43,8 @@ Route::group(['prefix' => 'locations'], function () {
     Route::get('create', 'LocationController@create');
     Route::get('{location}', 'LocationController@show');
     Route::post('store', 'LocationController@store');
-    Route::get('{locations}/edit', 'LocationController@edit');
-    Route::put('{locations}', 'LocationController@update');
+    Route::get('{location}/edit', 'LocationController@edit');
+    Route::put('{location}', 'LocationController@update');
 });
 
 
@@ -53,16 +53,16 @@ Route::group(['prefix' => 'orders'], function () {
     Route::get('create', 'OrderController@create');
     Route::get('{order}', 'OrderController@show');
     Route::post('store', 'OrderController@store');
-    Route::get('{orders}/edit', 'OrderController@edit');
-    Route::put('{orders}', 'OrderController@update');
+    Route::get('{order}/edit', 'OrderController@edit');
+    Route::put('{order}', 'OrderController@update');
 });
 
 
-Route::name(['prefix' => 'products'], function () {
+Route::group(['prefix' => 'products'], function () {
     Route::get('', 'ProductController@index');
     Route::get('create', 'ProductController@create');
     Route::get('{product}', 'ProductController@show');
     Route::post('store', 'ProductController@store');
-    Route::get('{products}/edit', 'ProductController@edit');
-    Route::put('{products}', 'ProductController@update');
+    Route::get('{product}/edit', 'ProductController@edit');
+    Route::put('{product}', 'ProductController@update');
 });

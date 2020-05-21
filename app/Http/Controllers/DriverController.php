@@ -27,7 +27,9 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        $driverCodes = Driver::distinct()->get('driverCode')->sortBy('driverCode');
+        // dd($driverCodes);
+        return view('drivers.createOrUpdate', compact('driverCodes'));
     }
 
     /**
@@ -38,7 +40,20 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = request()->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'driverCode' => 'required'
+        ]);
+
+        // dd($request);
+
+        Driver::updateOrCreate(['id' => $request->id], [
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'driverCode' => $request->driverCode
+        ]);
+        return redirect('drivers');
     }
 
     /**
@@ -60,9 +75,10 @@ class DriverController extends Controller
      */
     public function edit(Driver $driver)
     {
-        $editDriver = Driver::find($driver);
-        dd($editDriver);
-        // return view('details', compact('detailcourse'));
+        $editDriver = Driver::find($driver)->first();
+        $driverCodes = Driver::distinct()->get('driverCode')->sortBy('driverCode');
+        // dd($driverCodes);
+        return view('drivers.createOrUpdate', compact(['editDriver', 'driverCodes']));
     }
 
     /**
@@ -74,7 +90,6 @@ class DriverController extends Controller
      */
     public function update(Request $request, Driver $driver)
     {
-        //
     }
 
     /**
