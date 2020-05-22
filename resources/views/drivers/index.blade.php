@@ -38,7 +38,8 @@
               <td>{{$driver->driverCode}}</td>
               <td><a name="" id="" class="btn btn-warning btn-block" href="{{ route('drivers.edit', $driver->id) }}"
                   role="button"><i class="fas fa-edit"></i></a><a name="" id="" class="btn btn-danger btn-block"
-                  href="{{$driver->id}}/delete" role="button"><i class="fas fa-trash-alt"></i></a></td>
+                  href="{{ route('drivers.destroy', $driver->id) }}" role="button"><i class="fas fa-trash-alt"></i></a>
+              </td>
 
 
               {{-- <td></td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Driver;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->get();
+        // $orders = Order::all()->pivot();
+        // $drivers = Driver::all();
+        // ->withPivot(['driver_id', 'metric_id', 'loading_location_id', 'delivery_location_id', 'product_id', 'loading_client_id', 'delivery_client_id'])
+
+        // dd($orders);
+        return view('orders.index', compact('orders'));
     }
 
     /**

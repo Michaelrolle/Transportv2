@@ -35,6 +35,7 @@ Route::group(['prefix' => 'drivers', 'as' => 'drivers.'], function () {
     Route::post('store', 'DriverController@store')->name('store');
     Route::get('{driver}/edit', 'DriverController@edit')->name('edit');
     Route::put('{driver}', 'DriverController@update')->name('update');
+    Route::delete('{driver}', 'DriverController@destroy')->name('destroy');
 });
 
 
@@ -48,13 +49,14 @@ Route::group(['prefix' => 'locations'], function () {
 });
 
 
-Route::group(['prefix' => 'orders'], function () {
+Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
     Route::get('', 'OrderController@index');
     Route::get('create', 'OrderController@create');
     Route::get('{order}', 'OrderController@show');
     Route::post('store', 'OrderController@store');
-    Route::get('{order}/edit', 'OrderController@edit');
+    Route::get('{order}/edit', 'OrderController@edit')->name('edit');;
     Route::put('{order}', 'OrderController@update');
+    Route::delete('{order}', 'OrderController@destroy')->name('destroy');
 });
 
 

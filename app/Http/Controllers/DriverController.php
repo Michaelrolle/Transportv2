@@ -100,6 +100,8 @@ class DriverController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        //
+        Driver::destroy($driver);
+
+        return view('drivers');
     }
 }
