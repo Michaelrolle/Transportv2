@@ -56,9 +56,9 @@
                             <td>{{$order->quantity}} {{$order->metric->name}}</td>
                             <td>{{$order->product->name}}</td>
                             <td>{{$order->loadingClient->name}}</td>
-                            <td>{{$order->loadingDateTime}}</td>
+                            <td>{{ date('d-M-y h:i', strtotime($order->loadingDateTime)) }}</td>
                             <td>{{$order->deliveryClient->name}}</td>
-                            <td>{{$order->deliveryDateTime}}</td>
+                            <td>{{ date('d-M-y h:i', strtotime($order->deliveryDateTime)) }}</td>
                             <td><a name="" id="" class="btn btn-warning btn-block"
                                     href="{{ route('orders.edit', $order->id) }}" role="button"><i
                                         class="fas fa-edit"></i></a><a name="" id="" class="btn btn-danger btn-block"

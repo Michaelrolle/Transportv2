@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Driver;
+use App\Location;
+use App\Product;
+use App\Client;
+use App\Metric;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->get();
-        // $orders = Order::all()->pivot();
+        // $orders = Order::all();
         // $drivers = Driver::all();
         // ->withPivot(['driver_id', 'metric_id', 'loading_location_id', 'delivery_location_id', 'product_id', 'loading_client_id', 'delivery_client_id'])
 
@@ -64,7 +68,18 @@ class OrderController extends Controller
      */
     public function edit(Order $Order)
     {
-        //
+        $id = $Order->id;
+        $detail = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->where('id', $id)->first();
+        $drivers = Driver::all()->sortBy('lastName')->pluck('full_name', 'id');
+        $locations = Location::all()->sortBy('address')->pluck('full_location', 'id');
+        $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
+        $metrics = Metric::all()->sortBy('name')->pluck('name', 'id');
+        $clients = Client::all()->sortBy('name')->pluck('name', 'id');
+        $order = $detail->getAttributes();
+
+        // dd($drivers);
+
+        return view('orders.createOrUpdate', compact('order', 'drivers', 'locations', 'products', 'metrics', 'clients'));
     }
 
     /**

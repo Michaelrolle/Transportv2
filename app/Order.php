@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    // return $this->belongsTo('App\User', 'twitter_id', 'twitter_id');
+    use FormAccessible;
     protected $guarded = ['id'];
+    protected $dates = ['loadingDateTime', 'DeliveryDateTime'];
 
     public function deliveryClient()
     {

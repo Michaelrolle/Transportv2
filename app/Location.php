@@ -6,9 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    protected $fillable= ['address', 'city', 'postCode' ,'country'];
+    protected $fillable = ['address', 'city', 'postCode', 'country'];
 
-    public function order(){
+    public function order()
+    {
         return $this->hasMany(Order::class);
+    }
+
+    public function getFullLocationAttribute()
+    {
+        return $this->address . ' ' . $this->city;
     }
 }

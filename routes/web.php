@@ -54,8 +54,8 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
     Route::get('create', 'OrderController@create');
     Route::get('{order}', 'OrderController@show');
     Route::post('store', 'OrderController@store');
-    Route::get('{order}/edit', 'OrderController@edit')->name('edit');;
-    Route::put('{order}', 'OrderController@update');
+    Route::get('{order}/edit', 'OrderController@edit')->name('edit');
+    Route::put('{order}', 'OrderController@update')->name('update');
     Route::delete('{order}', 'OrderController@destroy')->name('destroy');
 });
 
