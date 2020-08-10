@@ -1,5 +1,6 @@
 @extends('layout.index')
 @section('content')
+@include('sweetalert::alert')
 {{-- <ul>
     @foreach($orders as $order)
     <li>{{$order->loadingClient->name}}</li>
@@ -8,9 +9,11 @@
 <div class="card-body">
     <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row">
-            <div class="col-sm-12">
-                test
+            @if (session('succes'))
+            <div class="alert alert-succes">
+                {{session('succes')}}
             </div>
+            @endif
         </div>
         <div class="row">
             <div class="col-sm-12">

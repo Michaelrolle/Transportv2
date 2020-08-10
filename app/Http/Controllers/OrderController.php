@@ -8,7 +8,9 @@ use App\Location;
 use App\Product;
 use App\Client;
 use App\Metric;
+use Alert;
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderUpdateRequest;
 
 class OrderController extends Controller
 {
@@ -77,7 +79,7 @@ class OrderController extends Controller
         $clients = Client::all()->sortBy('name')->pluck('name', 'id');
         $order = $detail->getAttributes();
 
-        // dd($drivers);
+        // dd($clients);
 
         return view('orders.createOrUpdate', compact('order', 'drivers', 'locations', 'products', 'metrics', 'clients'));
     }
@@ -89,11 +91,13 @@ class OrderController extends Controller
      * @param  \App\Order  $Order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $Order)
+    public function update(OrderUpdateRequest $request, Order $Order)
     {
-        //
-    }
+        $validated = $request->validated();
+        $Order->update($validated);
 
+        return redirect('orders')->with('success', 'order was successfully updated');
+    }
     /**
      * Remove the specified resource from storage.
      *
