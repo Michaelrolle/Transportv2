@@ -1,11 +1,7 @@
 @extends('layout.index')
 @section('content')
 @include('sweetalert::alert')
-{{-- <ul>
-    @foreach($orders as $order)
-    <li>{{$order->loadingClient->name}}</li>
-<li>{{$order->driver->firstName}}</li>
-</ul> --}}
+<a href="{{route('orders.create')}}" class="btn btn-success btn-block">create</a>
 <div class="card-body">
     <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row">

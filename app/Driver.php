@@ -17,4 +17,9 @@ class Driver extends Model
     {
         return $this->lastName . ' ' . $this->firstName . ' ' . $this->driverCode;
     }
+
+    public function getNameAndIdAttribute()
+    {
+        return $this->full_name . '' . $this->id;
+    }
 }

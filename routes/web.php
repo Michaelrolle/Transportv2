@@ -51,12 +51,12 @@ Route::group(['prefix' => 'locations'], function () {
 
 Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
     Route::get('', 'OrderController@index');
-    Route::get('create', 'OrderController@create');
+    Route::get('create', 'OrderController@create')->name('create');
     Route::get('{order}', 'OrderController@show');
-    Route::post('store', 'OrderController@store');
+    Route::post('store', 'OrderController@store')->name('store');;
     Route::get('{order}/edit', 'OrderController@edit')->name('edit');
     Route::put('{order}', 'OrderController@update')->name('update');
-    Route::delete('{order}', 'OrderController@destroy')->name('destroy');
+    Route::get('{order}/delete', 'OrderController@destroy')->name('destroy');
 });
 
 

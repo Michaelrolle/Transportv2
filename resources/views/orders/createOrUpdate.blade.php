@@ -1,18 +1,17 @@
 @extends('layout.index')
 @section('content')
 <div class="container">
-    {{-- <p>{{}}</p> --}}
-    {{-- @foreach($order as $key=>$value)
-    <p>{{$key}} : {{$value}}</p>
-    @endforeach --}}
-
+    @if (isset($order))
     {{Form::model($order, ['method' => 'PUT' , 'route' => ['orders.update', $order['id']]])}}
+    @else
+    {{Form::open(['method' => 'POST' ,'route' => 'orders.store'])}}
+    @endif
     <div class="form-group">
         {{ Form::label('refNumber', 'Reference Number')}}
         {{ Form::number('refNumber', null, ['class' => 'form-control'])}}
         <div class="form-group">
             {{ Form::label('loadingDateTime', 'Loading Date')}}
-            {{ Form::date('loadingDateTime', \Carbon\Carbon::parse($order['loadingDateTime'])->format('Y-m-d'))}}
+            {{ Form::date('loadingDateTime', \Carbon\Carbon::parse($order['loadingDateTime'] ?? '')->format('Y-m-d'))}}
         </div>
         <div class="form-group">
             {{ Form::label('loading_location_id', 'Loading Location')}}
@@ -49,15 +48,15 @@
     <div class="form-group">
         <div class="form-group">
             {{ Form::label('deliveryDateTime', 'Delivery Date')}}
-            {{ Form::date('deliveryDateTime', \Carbon\Carbon::parse($order['deliveryDateTime'])->format('Y-m-d'))}}
+            {{ Form::date('deliveryDateTime', \Carbon\Carbon::parse($order['deliveryDateTime']?? '')->format('Y-m-d'))}}
         </div>
         <div class="form-group">
             {{ Form::label('delivery_location_id', 'Delivery Location')}}
-            {{ Form::select('delivery_location_id', $locations , $order['delivery_location_id'])}}
+            {{ Form::select('delivery_location_id', $locations , $order['delivery_location_id'] ?? '')}}
         </div>
         <div class="form-group">
             {{ Form::label('delivery_client_id', 'Delivery Client')}}
-            {{ Form::select('delivery_client_id', $clients , $order['delivery_client_id'])}}
+            {{ Form::select('delivery_client_id', $clients , $order['delivery_client_id']?? '')}}
         </div>
         <div class="form-group">
             {{ Form::label('deliveryNotes', 'Delivery Notes')}}
