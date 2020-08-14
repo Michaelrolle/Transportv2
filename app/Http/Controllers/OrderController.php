@@ -9,6 +9,7 @@ use App\Product;
 use App\Client;
 use App\Metric;
 use Alert;
+use PDF;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Requests\OrderCreateRequest;
@@ -118,5 +119,14 @@ class OrderController extends Controller
         \App\Order::destroy($Order->id);
 
         return redirect('orders')->with('success', 'order was successfully deleted');
+    }
+
+    public function downloadPDF($order)
+    {
+        $detail = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->find($order);
+        $pdf = PDF::loadView('orders.pdf', compact('detail'));
+        // dd($detail);
+
+        return $pdf->download('orders' . $detail->refNumber . '.pdf');
     }
 }

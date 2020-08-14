@@ -57,6 +57,7 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
     Route::get('{order}/edit', 'OrderController@edit')->name('edit');
     Route::put('{order}', 'OrderController@update')->name('update');
     Route::get('{order}/delete', 'OrderController@destroy')->name('destroy');
+    Route::get('{order}/downloadPDF', 'OrderController@downloadPDF')->name('downloadPDF');
 });
 
 
