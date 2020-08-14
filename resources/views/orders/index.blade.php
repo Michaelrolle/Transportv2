@@ -1,7 +1,7 @@
 @extends('layout.index')
 @section('content')
 @include('sweetalert::alert')
-<a href="{{route('orders.create')}}" class="btn btn-success btn-block">create</a>
+<a href="{{route('orders.create')}}" class="btn btn-success btn-block">Create New Order</a>
 <div class="card-body">
     <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row">

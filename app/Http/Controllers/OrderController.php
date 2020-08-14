@@ -11,6 +11,7 @@ use App\Metric;
 use Alert;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderUpdateRequest;
+use App\Http\Requests\OrderCreateRequest;
 
 class OrderController extends Controller
 {
@@ -22,9 +23,6 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->get();
-        // $orders = Order::all();
-        // $drivers = Driver::all();
-        // ->withPivot(['driver_id', 'metric_id', 'loading_location_id', 'delivery_location_id', 'product_id', 'loading_client_id', 'delivery_client_id'])
 
         // dd($orders);
         return view('orders.index', compact('orders'));
@@ -37,7 +35,13 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $drivers = Driver::all()->sortBy('lastName')->pluck('full_name', 'id');
+        $locations = Location::all()->sortBy('address')->pluck('full_location', 'id');
+        $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
+        $metrics = Metric::all()->sortBy('name')->pluck('name', 'id');
+        $clients = Client::all()->sortBy('name')->pluck('name', 'id');
+
+        return view('orders.createOrUpdate', compact('drivers', 'locations', 'products', 'metrics', 'clients'));
     }
 
     /**
@@ -46,9 +50,14 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderCreateRequest $request)
     {
-        //
+
+        $validated = $request->validated();
+        // dd($validated);
+        Order::create($validated);
+
+        return redirect('orders')->with('success', 'order was successfully created');
     }
 
     /**
@@ -106,6 +115,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $Order)
     {
-        //
+        \App\Order::destroy($Order->id);
+
+        return redirect('orders')->with('success', 'order was successfully deleted');
     }
 }

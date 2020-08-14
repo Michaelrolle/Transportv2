@@ -24,7 +24,7 @@ class OrderCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'refNumber' => 'required | integer | unique:orders, refNumber',
+            'refNumber' => 'required | integer | unique:orders,refNumber',
             'quantity' => 'required',
             'loadingDateTime' => 'required | date',
             'deliveryDateTime' => 'required | date',
