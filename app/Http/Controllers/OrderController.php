@@ -127,6 +127,6 @@ class OrderController extends Controller
         $pdf = PDF::loadView('orders.pdf', compact('detail'));
         // dd($detail);
 
-        return $pdf->download('orders' . $detail->refNumber . '.pdf');
+        return $pdf->download('order' . $detail->refNumber . '.pdf');
     }
 }

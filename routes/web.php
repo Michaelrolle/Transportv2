@@ -69,3 +69,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('{product}/edit', 'ProductController@edit');
     Route::put('{product}', 'ProductController@update');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
