@@ -60,7 +60,7 @@
                             <td>{{ date('d-M-y h:i', strtotime($order->deliveryDateTime)) }}</td>
                             <td>
                                 <a name="" id="" class="btn btn-primary btn-block"
-                                    href="{{ route('orders.downloadPDF', $order->id) }}" role="button"><i
+                                    href="{{ route('downloadPDF', $order->id) }}" role="button"><i
                                         class="fas fa-file-pdf"></i></a>
                                 <a name="" id="" class="btn btn-warning btn-block"
                                     href="{{ route('orders.edit', $order->id) }}" role="button"><i
