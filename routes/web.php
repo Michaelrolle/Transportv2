@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 
 Route::group(['prefix' => 'clients'], function () {
@@ -29,7 +29,7 @@ Route::group(['prefix' => 'clients'], function () {
 
 
 Route::group(['prefix' => 'drivers', 'as' => 'drivers.'], function () {
-    Route::get('', 'DriverController@index');
+    Route::get('', 'DriverController@index')->name('index');
     Route::get('create', 'DriverController@create')->name('create');
     Route::get('{driver}', 'DriverController@show')->name('show');
     Route::post('store', 'DriverController@store')->name('store');
@@ -50,9 +50,9 @@ Route::group(['prefix' => 'locations'], function () {
 
 
 Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
-    Route::get('', 'OrderController@index');
+    Route::get('', 'OrderController@index')->name('index');
     Route::get('create', 'OrderController@create')->name('create');
-    Route::get('{order}', 'OrderController@show');
+    Route::get('{order}', 'OrderController@show')->name('show');
     Route::post('store', 'OrderController@store')->name('store');;
     Route::get('{order}/edit', 'OrderController@edit')->name('edit');
     Route::put('{order}', 'OrderController@update')->name('update');
@@ -61,15 +61,13 @@ Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
 });
 
 
-Route::group(['prefix' => 'products'], function () {
-    Route::get('', 'ProductController@index');
-    Route::get('create', 'ProductController@create');
-    Route::get('{product}', 'ProductController@show');
-    Route::post('store', 'ProductController@store');
-    Route::get('{product}/edit', 'ProductController@edit');
+Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
+    Route::get('', 'ProductController@index')->name('index');
+    Route::get('create', 'ProductController@create')->name('create');
+    Route::get('{product}', 'ProductController@show')->name('show');
+    Route::post('store', 'ProductController@store')->name('edit');
+    Route::get('{product}/edit', 'ProductController@edit')->name('update');
     Route::put('{product}', 'ProductController@update');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

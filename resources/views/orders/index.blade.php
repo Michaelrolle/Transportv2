@@ -65,15 +65,11 @@
                                 <a name="" id="" class="btn btn-warning btn-block"
                                     href="{{ route('orders.edit', $order->id) }}" role="button"><i
                                         class="fas fa-edit"></i></a>
-                                @can('delete order')<a name="" id="" class="btn btn-danger btn-block"
+                                @can('delete')<a name="" id="" class="btn btn-danger btn-block"
                                     href="{{ route('orders.destroy', $order->id) }}" role="button"><i
                                         class="fas fa-trash-alt"></i></a>
                                 @endcan
                             </td>
-
-
-                            {{-- <td></td>
-                    <td style="display: none;"></td> --}}
                         </tr>
                         @endforeach
                     </tbody>

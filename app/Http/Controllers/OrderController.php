@@ -13,9 +13,6 @@ use PDF;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Requests\OrderCreateRequest;
-use App\User;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 class OrderController extends Controller
 {
@@ -28,13 +25,7 @@ class OrderController extends Controller
     {
         $orders = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->get();
 
-        // $role = Role::create(['name' => 'admin']);
-        // $permission = Permission::create(['name' => 'delete order']);
-        // $user = User::find(1);
-        // $user->givePermissionTo('delete order');
-
-        // $permission->assignRole($role);
-        // dd($user);
+        // dd(\Request::route()->getname());
         return view('orders.index', compact('orders'));
     }
 

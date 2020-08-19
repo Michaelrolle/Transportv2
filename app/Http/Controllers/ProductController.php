@@ -14,11 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products= Product::all();
+        $products = Product::all();
 
-        dd($products);
+        // dd($products);
+        // dd(\Request::route()->getname());
 
-        // return view('products.index', compact('products'));
+        return view('products.index', compact('products'));
         // return view ('products.index', ['products' => $products]);
     }
 
