@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             MetricSeeder::class,
             ProductSeeder::class,
-            OrderSeeder::class
+            OrderSeeder::class,
+            RolesAndPermissionsSeeder::class,
+            UserSeeder::class
         ]);
-        
     }
 }
