@@ -38,11 +38,11 @@ class OrderController extends Controller
     {
         $drivers = Driver::all()->sortBy('lastName')->pluck('full_name', 'id');
         $locations = Location::all()->sortBy('address')->pluck('full_location', 'id');
-        $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
+        // $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
         $metrics = Metric::all()->sortBy('name')->pluck('name', 'id');
         $clients = Client::all()->sortBy('name')->pluck('name', 'id');
 
-        return view('orders.createOrUpdate', compact('drivers', 'locations', 'products', 'metrics', 'clients'));
+        return view('orders.createOrUpdate', compact('drivers', 'locations', 'metrics', 'clients'));
     }
 
     /**
@@ -84,14 +84,14 @@ class OrderController extends Controller
         $detail = Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->where('id', $id)->first();
         $drivers = Driver::all()->sortBy('lastName')->pluck('full_name', 'id');
         $locations = Location::all()->sortBy('address')->pluck('full_location', 'id');
-        $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
+        // $products = Product::all()->sortBy('productNumber')->pluck('full_name', 'id');
         $metrics = Metric::all()->sortBy('name')->pluck('name', 'id');
         $clients = Client::all()->sortBy('name')->pluck('name', 'id');
         $order = $detail->getAttributes();
 
         // dd($clients);
 
-        return view('orders.createOrUpdate', compact('order', 'drivers', 'locations', 'products', 'metrics', 'clients'));
+        return view('orders.createOrUpdate', compact('order', 'drivers', 'locations', 'metrics', 'clients'));
     }
 
     /**
