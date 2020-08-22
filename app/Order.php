@@ -14,25 +14,21 @@ class Order extends Model
     public function deliveryClient()
     {
         return $this->belongsTo(Client::class, 'delivery_client_id', 'id');
-        // return $this->belongsTo(Client::class, 'loading_client_id', 'id');
     }
 
     public function loadingClient()
     {
-        // return $this->belongsTo(Client::class, 'delivery_client_id', 'id');
         return $this->belongsTo(Client::class, 'loading_client_id', 'id');
     }
 
     public function loadingLocation()
     {
-        // return $this->belongsTo(Location::class, 'delivery_location_id', 'id');
         return $this->belongsTo(Location::class, 'loading_location_id', 'id');
     }
 
     public function deliveryLocation()
     {
         return $this->belongsTo(Location::class, 'delivery_location_id', 'id');
-        // return $this->belongsTo(Location::class, 'loading_location_id', 'id');
     }
 
 
