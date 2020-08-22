@@ -15,23 +15,31 @@ class OrderService
 
     public static function index()
     {
-        return Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->get();
+        return Order::all();
     }
 
     public static function show($id)
     {
-        return Order::with(['driver', 'metric', 'loadingLocation', 'product', 'loadingClient', 'deliveryLocation', 'deliveryClient'])->find($id);
+        return Order::findOrFail($id);
     }
 
-    public static function create()
+    public static function createOrEdit($id = null)
     {
+        $order = self::show($id);
         $drivers = DriverService::getAllWithNameandId();
         $locations = LocationService::getAllWithNameandId();
         $products = ProductService::getAllWithNameandId();
         $metrics = MetricService::getAllWithNameandId();
         $clients = ClientService::getAllWithNameandId();
 
-        $data = ['drivers' => $drivers, 'locations' => $locations, 'products' => $products, 'metrics' => $metrics, 'clients' => $clients];
+        $data = [
+            'order' => $order,
+            'drivers' => $drivers,
+            'locations' => $locations,
+            'products' => $products,
+            'metrics' => $metrics,
+            'clients' => $clients
+        ];
 
         return $data;
     }
