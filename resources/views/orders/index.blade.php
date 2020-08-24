@@ -65,9 +65,14 @@
                                 <a name="" id="" class="btn btn-warning btn-block"
                                     href="{{ route('orders.edit', $order->id) }}" role="button"><i
                                         class="fas fa-edit"></i></a>
-                                @can('delete')<a name="" id="" class="btn btn-danger btn-block"
-                                    href="{{ route('orders.destroy', $order->id) }}" role="button"><i
-                                        class="fas fa-trash-alt"></i></a>
+                                @can('delete')
+                                <form action="{{ route('orders.destroy', $order->id)}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-block" type="submit" value="">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </button>
+                                </form>
                                 @endcan
                             </td>
                         </tr>
