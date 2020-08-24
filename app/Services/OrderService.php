@@ -20,7 +20,7 @@ class OrderService
 
     public static function show($id)
     {
-        return Order::findOrFail($id);
+        return Order::find($id);
     }
 
     public static function createOrEdit($id = null)
