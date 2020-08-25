@@ -4,12 +4,17 @@ namespace App;
 
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Order extends Model
 {
     use FormAccessible;
     protected $guarded = ['id'];
     protected $dates = ['loadingDateTime', 'DeliveryDateTime'];
+    protected $casts = [
+        'loadingDateTime' => 'datetime:d-m-Y H:m',
+        'deliveryDateTime' => 'datetime:d-m-Y H:m'
+    ];
 
     public function deliveryClient()
     {
