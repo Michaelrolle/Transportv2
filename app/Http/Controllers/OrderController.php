@@ -51,8 +51,7 @@ class OrderController extends Controller
     public function store(OrderCreateRequest $request)
     {
 
-        $validated = $request->validated();
-        Order::create($validated);
+        Order::create($request->validated());
 
         return redirect('orders')->with('success', 'order was successfully created');
     }
@@ -92,8 +91,7 @@ class OrderController extends Controller
      */
     public function update(OrderUpdateRequest $request, Order $Order)
     {
-        $validated = $request->validated();
-        $Order->update($validated);
+        $Order->update($request->validated());
 
         return redirect('orders')->with('success', 'order was successfully updated');
     }
