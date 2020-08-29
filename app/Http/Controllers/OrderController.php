@@ -4,17 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Alert;
+use App\Events\OrderCreatedEvent;
 use PDF;
-use Illuminate\Http\Request;
 use App\Http\Requests\OrderUpdateRequest;
 use App\Http\Requests\OrderCreateRequest;
-
-use App\Services\DriverService;
-use App\Services\LocationService;
 use App\Services\OrderService;
-use App\Services\ProductService;
-use App\Services\MetricService;
-use App\Services\ClientService;
+
 
 class OrderController extends Controller
 {
@@ -51,9 +46,12 @@ class OrderController extends Controller
     public function store(OrderCreateRequest $request)
     {
 
-        Order::create($request->validated());
+        $order = $request->validated();
+        // dd($order["delivery_client_id"]);
+        Order::create($order);
+        OrderCreatedEvent::dispatch($order);
 
-        return redirect('orders')->with('success', 'order was successfully created');
+        // return redirect('orders')->with('success', 'order was successfully created');
     }
 
     /**
@@ -62,10 +60,8 @@ class OrderController extends Controller
      * @param  \App\Order  $Order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $Order)
+    public function show(Order $order)
     {
-        $order = OrderService::show($Order->id);
-
         return view('orders.show', compact('order'));
     }
 
@@ -75,9 +71,9 @@ class OrderController extends Controller
      * @param  \App\Order  $Order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $Order)
+    public function edit(Order $order)
     {
-        $order = OrderService::createOrEdit($Order->id);
+        $order = OrderService::createOrEdit($order);
 
         return view('orders.createOrEdit', $order);
     }
@@ -101,18 +97,17 @@ class OrderController extends Controller
      * @param  \App\Order  $Order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $Order)
+    public function destroy(Order $order)
     {
-        Order::destroy($Order->id);
+        Order::destroy($order);
 
         return redirect('orders')->with('success', 'order was successfully deleted');
     }
 
-    public function downloadPDF(Order $Order)
+    public function downloadPDF(Order $order)
     {
-        $detail = OrderService::show($Order->id);
-        $pdf = PDF::loadView('orders.pdf', compact('detail'));
+        $pdf = PDF::loadView('orders.pdf', compact('order'));
 
-        return $pdf->download('order' . $detail->refNumber . '.pdf');
+        return $pdf->download('order' . $order->refNumber . '.pdf');
     }
 }

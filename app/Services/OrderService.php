@@ -18,14 +18,8 @@ class OrderService
         return Order::all();
     }
 
-    public static function show($id)
+    public static function createOrEdit($order = null)
     {
-        return Order::find($id);
-    }
-
-    public static function createOrEdit($id = null)
-    {
-        $order = self::show($id);
         $drivers = DriverService::getAllWithNameandId();
         $locations = LocationService::getAllWithNameandId();
         $products = ProductService::getAllWithNameandId();
